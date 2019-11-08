@@ -1,0 +1,65 @@
+doctype html
+html(lang="ja")
+  head
+    meta(charset="UTF-8")
+    style.
+      *{
+          margin: 0;
+          padding: 0;
+          background: snow;
+      }
+      header{
+        padding: 10px;
+        background: #E8F5FD;
+      }
+      form{
+        max-width: 480px;
+        margin: auto;
+        text-align: right;
+      }
+      header textarea{
+        width: 450px;
+        height: 32px;
+        font-size: 14px;
+        border-radius: 5px;
+        border: 1px solid #e6ecf0;
+        padding: 5px 8px;
+        resize: none;
+        box-sizing: border-box;
+      }
+      button[type="submit"]{
+        appearance: none;
+        width: 90px;
+        text-align: center;
+        background: #4AB3F4;
+        font-size: 14px;
+        line-height: 34px;
+        text-align: center;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 45px;
+        border: none;
+      }
+      main{
+        padding:50px;
+      }
+      .box{
+        display:block;
+        position:relative;
+        max-width: 400px;
+        margin: auto;
+        text-align: center;
+      }
+
+    title 秘密の匿名掲示板
+  body
+    main
+      .box
+        h2 ページがみつかりません
+        h1 ？
+        img(src="/images/404.jpg" style="width:200px;")
+      script.
+        function jump() {
+          location.href = "/posts";
+        }
+        setTimeout(jump, 3000);

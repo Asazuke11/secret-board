@@ -1,0 +1,170 @@
+doctype html
+html(lang="ja")
+  head
+    meta(charset="UTF-8")
+    style.
+      *{
+          margin: 0;
+          padding: 0;
+      }
+      header{
+        padding: 10px;
+        background:green;
+      }
+      form{
+        max-width: 480px;
+        margin: auto;
+        text-align: right;
+      }
+      header textarea{
+        width: 450px;
+        height: 32px;
+        font-size: 14px;
+        border-radius: 5px;
+        border: 1px solid #e6ecf0;
+        padding: 5px 8px;
+        resize: none;
+        box-sizing: border-box;
+      }
+      button[type="submit"]{
+        appearance: none;
+        width: 90px;
+        text-align: center;
+        background: #4AB3F4;
+        font-size: 14px;
+        line-height: 34px;
+        text-align: center;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 45px;
+        border: none;
+      }
+      main{
+        padding:10px;
+        background: linear-gradient(to top right, #b8ffbf 0%, #92d417 100%);
+      }
+      .box{
+        display:block;
+        position:relative;
+        background:snow;
+        max-width: 600px;
+        margin: auto;
+        margin-top: 5px;
+        padding:10px;
+        border-bottom:solid 1px pink;
+        border-radius: 15px;
+      }
+      img{
+        position:absolute;
+        top:3px;
+        height:64px;
+        width:64px;
+        border-radius: 16px;
+      }
+      .image-area{
+        display:inline-block;
+        width:64px;
+      }
+      .text-area{
+        margin-left:10px;
+        display:inline-block;
+        width:526px;
+        white-space:pre-wrap;
+      }
+      #sec{
+        float:right;
+        font-size: 10px;
+      }
+      .ww1{
+        position:fixed;
+        bottom:450px;
+        left:-100px;
+        z-index:2;
+      }
+      #ww1{
+        width:500px;
+        height:500px;
+      }
+      .ww2{
+        position:fixed;
+        bottom:350px;
+        right:380px;
+        z-index:2;
+      }
+      #ww2{
+        width:450px;
+        height:450px;
+      }
+    title 秘密の匿名掲示板
+  body
+    header
+      form(action="/posts" method="post")
+        textarea(name="content" placeholder="いまどうしてる？")
+        p
+          button(type="submit") 投稿
+      
+    main
+      .ww1
+        img#ww1(src="/images/ww1.png")
+      .ww2
+        img#ww2(src="/images/ww2.png")
+      if(posts)
+        each post in posts
+          .box
+            
+            if(post.char == 0)
+              .image-area
+                img(src="/images/buta.png" style="margin-right:10px;")
+              .text-area
+                span 野生のブタさん＠#{post.trackingCookie}
+                span#sec 投稿:#{post.time}
+                p
+                  span #{post.content}だぶー。
+            else if(post.char == 1)
+              .image-area
+                img(src="/images/azarasi.png" style="margin-right:10px;")
+              .text-area
+                span 野生のあざらしさん＠#{post.trackingCookie}
+                span#sec 投稿:#{post.time}
+                p
+                  span #{post.content}だもきゅ。
+            else if(post.char == 2)
+              .image-area
+                img(src="/images/hituji.png" style="margin-right:10px;")
+              .text-area
+                span 野生のひつじさん＠#{post.trackingCookie}
+                span#sec 投稿:#{post.time}
+                p
+                  span #{post.content}だメ～。
+            else if(post.char == 3)
+              .image-area
+                img(src="/images/inu.png" style="margin-right:10px;")
+              .text-area
+                span 野生のいぬさん＠#{post.trackingCookie}
+                span#sec 投稿:#{post.time}
+                p
+                  span #{post.content}だわん。
+            else if(post.char == 4)
+              .image-area
+                img(src="/images/kuma.png" style="margin-right:10px;")
+              .text-area
+                span 野生のくまさん＠#{post.trackingCookie}
+                span#sec 投稿:#{post.time}
+                p
+                  span #{post.content}だくまー。
+            else if(post.char == 5)
+              .image-area
+                img(src="/images/okami.png" style="margin-right:10px;")
+              .text-area
+                span 野生のおおかみさん＠#{post.trackingCookie}
+                span#sec 投稿:#{post.time}
+                p
+                  span #{post.content}だうぉーん。
+            else
+              .image-area
+                img(src="/images/tanuki.png" style="margin-right:10px;")
+              .text-area
+                span 野生のたぬきさん＠#{post.trackingCookie}
+                span#sec 投稿:#{post.time}
+                p
+                  span #{post.content}だぽん。
