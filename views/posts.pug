@@ -26,7 +26,7 @@ html(lang="ja")
         resize: none;
         box-sizing: border-box;
       }
-      button[type="submit"]{
+      .tweet{
         appearance: none;
         width: 90px;
         text-align: center;
@@ -36,11 +36,25 @@ html(lang="ja")
         text-align: center;
         color: #fff;
         font-weight: bold;
-        border-radius: 45px;
+        border-radius: 20px;
         border: none;
+      }
+      .Delete{
+        appearance: none;
+        width: 50px;
+        text-align: center;
+        background: #FF0000;
+        font-size: 12px;
+        line-height: 20px;
+        text-align: center;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 5px;
+        border: dotted snow;
       }
       main{
         padding:10px;
+        height:100vh;
         background: linear-gradient(to top right, #b8ffbf 0%, #92d417 100%);
       }
       .box{
@@ -84,7 +98,7 @@ html(lang="ja")
       #ww1{
         width:500px;
         height:500px;
-        filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.5));
+        filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.9));
       }
       .ww2{
         position:fixed;
@@ -95,7 +109,7 @@ html(lang="ja")
       #ww2{
         width:450px;
         height:450px;
-        filter: drop-shadow(-5px 5px 10px rgba(0,0,0,0.5));
+        filter: drop-shadow(-5px 5px 5px rgba(0,0,0,0.9));
       }
     title 秘密の匿名掲示板
   body
@@ -103,7 +117,7 @@ html(lang="ja")
       form(action="/posts" method="post")
         textarea(name="content" placeholder="つぶやき")
         p
-          button(type="submit") つぶやく
+          button.tweet(type="submit") つぶやく
       
     main
       .ww1
@@ -113,7 +127,7 @@ html(lang="ja")
       if(posts)
         each post in posts
           .box
-            
+            - var isDeletable = (nowCookie === post.trackingCookie)
             if(post.char == 0)
               .image-area
                 img(src="/images/buta.png" style="margin-right:10px;")
@@ -122,6 +136,11 @@ html(lang="ja")
                 span#sec 投稿:#{post.time}
                 p
                   span #{post.content}だぶー。
+                p
+                  if isDeletable
+                    form(method="post" action="/posts?delete=1")
+                      input(type="hidden" name="id" value=post.id)
+                      button.Delete(type="submit") 削除
             else if(post.char == 1)
               .image-area
                 img(src="/images/azarasi.png" style="margin-right:10px;")
@@ -130,6 +149,11 @@ html(lang="ja")
                 span#sec 投稿:#{post.time}
                 p
                   span #{post.content}だもきゅ。
+                p
+                  if isDeletable
+                    form(method="post" action="/posts?delete=1")
+                      input(type="hidden" name="id" value=post.id)
+                      button.Delete(type="submit") 削除
             else if(post.char == 2)
               .image-area
                 img(src="/images/hituji.png" style="margin-right:10px;")
@@ -138,6 +162,11 @@ html(lang="ja")
                 span#sec 投稿:#{post.time}
                 p
                   span #{post.content}だメ～。
+                p
+                  if isDeletable
+                    form(method="post" action="/posts?delete=1")
+                      input(type="hidden" name="id" value=post.id)
+                      button.Delete(type="submit") 削除
             else if(post.char == 3)
               .image-area
                 img(src="/images/inu.png" style="margin-right:10px;")
@@ -146,6 +175,11 @@ html(lang="ja")
                 span#sec 投稿:#{post.time}
                 p
                   span #{post.content}だわん。
+                p
+                  if isDeletable
+                    form(method="post" action="/posts?delete=1")
+                      input(type="hidden" name="id" value=post.id)
+                      button.Delete(type="submit") 削除
             else if(post.char == 4)
               .image-area
                 img(src="/images/kuma.png" style="margin-right:10px;")
@@ -154,6 +188,11 @@ html(lang="ja")
                 span#sec 投稿:#{post.time}
                 p
                   span #{post.content}だくまー。
+                p
+                  if isDeletable
+                    form(method="post" action="/posts?delete=1")
+                      input(type="hidden" name="id" value=post.id)
+                      button.Delete(type="submit") 削除
             else if(post.char == 5)
               .image-area
                 img(src="/images/okami.png" style="margin-right:10px;")
@@ -162,6 +201,11 @@ html(lang="ja")
                 span#sec 投稿:#{post.time}
                 p
                   span #{post.content}だうぉーん。
+                p
+                  if isDeletable
+                    form(method="post" action="/posts?delete=1")
+                      input(type="hidden" name="id" value=post.id)
+                      button.Delete(type="submit") 削除
             else
               .image-area
                 img(src="/images/tanuki.png" style="margin-right:10px;")
@@ -170,3 +214,8 @@ html(lang="ja")
                 span#sec 投稿:#{post.time}
                 p
                   span #{post.content}だぽん。
+                p
+                  if isDeletable
+                    form(method="post" action="/posts?delete=1")
+                      input(type="hidden" name="id" value=post.id)
+                      button.Delete(type="submit") 削除
