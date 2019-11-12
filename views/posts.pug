@@ -93,7 +93,6 @@ html(lang="ja")
         position:fixed;
         bottom:450px;
         left:-100px;
-        z-index:2;
       }
       #ww1{
         width:500px;
@@ -104,7 +103,6 @@ html(lang="ja")
         position:fixed;
         bottom:350px;
         right:380px;
-        z-index:2;
       }
       #ww2{
         width:450px;
@@ -120,10 +118,6 @@ html(lang="ja")
           button.tweet(type="submit") つぶやく
       
     main
-      .ww1
-        img#ww1(src="/images/ww1.png")
-      .ww2
-        img#ww2(src="/images/ww2.png")
       if(posts)
         each post in posts
           .box
