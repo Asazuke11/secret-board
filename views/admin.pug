@@ -6,11 +6,10 @@ html(lang="ja")
       *{
           margin: 0;
           padding: 0;
-          background: snow;
       }
       header{
         padding: 10px;
-        background: #E8F5FD;
+        background:green;
       }
       form{
         max-width: 480px;
@@ -27,44 +26,190 @@ html(lang="ja")
         resize: none;
         box-sizing: border-box;
       }
-      button[type="submit"]{
+      .tweet{
         appearance: none;
-        width: 50px;
+        width: 90px;
         text-align: center;
         background: #4AB3F4;
         font-size: 14px;
-        line-height: 24px;
+        line-height: 34px;
         text-align: center;
         color: #fff;
         font-weight: bold;
+        border-radius: 20px;
         border: none;
       }
+      .Delete{
+        appearance: none;
+        width: 50px;
+        text-align: center;
+        background: #FF0000;
+        font-size: 12px;
+        line-height: 20px;
+        text-align: center;
+        color: #fff;
+        font-weight: bold;
+        border-radius: 5px;
+        border: dotted snow;
+      }
       main{
-        padding:50px;
+        padding:10px;
+        height:100%;
+        background: linear-gradient(to top right, #b8ffbf 0%, #92d417 100%);
       }
       .box{
         display:block;
         position:relative;
-        max-width: 400px;
+        background:snow;
+        max-width: 600px;
         margin: auto;
-        text-align: center;
+        margin-top: 5px;
+        padding:10px;
+        border-bottom:solid 1px pink;
+        border-radius: 15px;
       }
-
+      img{
+        position:absolute;
+        top:3px;
+        height:64px;
+        width:64px;
+        border-radius: 16px;
+      }
+      .image-area{
+        display:inline-block;
+        width:64px;
+      }
+      .text-area{
+        margin-left:10px;
+        display:inline-block;
+        width:526px;
+        white-space:pre-wrap;
+      }
+      #sec{
+        float:right;
+        font-size: 10px;
+      }
+      #logout{
+        color:white;
+        padding:2px;
+        font-size: 10px;
+        border:solid 1px;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+      #admin{
+        background: rgb(187,172,90);
+        background: linear-gradient(49deg, rgba(187,172,90,1) 0%, rgba(218,104,49,1) 66%, rgba(255,0,0,1) 100%);
+        border-radius: 10px;
+        color:yellow;
+      }
     title 秘密の匿名掲示板
   body
-    main
-      .box
-        h2 Passwordを入れてください
-        input#pass(name="admin" placeholder="パスワードをどうぞ")
+    header
+      a#logout(href="/posts") ログアウト
+      form(action="/posts?7d1e7fb9-add6-4903-be46-3eed284acc16" method="post")
+        textarea(name="content" placeholder="つぶやき")
         p
-          button.tweet#psbtn(type="submit") OK
-      script.
-        const passInput = document.getElementById('pass');
-        const passBtn = document.getElementById('psbtn');
-
-        passBtn.onclick = () =>{
-        const passValue = passInput.value;
-        console.log(passValue)
-        if(passValue === "admin"){
-          location.href = "https://www.google.com/";
-        }}
+          button.tweet(type="submit") つぶやく
+      
+    main
+      if(posts)
+        each post in posts
+          .box
+            if(post.postedBy === "admin")
+              #admin
+                .image-area
+                  img(src="/images/raion.png" style="margin-right:10px;")
+                .text-area
+                  span =★= 野生の管理人 =★=
+                  span#sec 投稿:#{post.time}
+                  p #{post.content}だがおー。
+                  p
+                    form(method="post" action="/posts?delete=2")
+                      input(type="hidden" name="id" value=post.id)
+                      button.Delete(type="submit") 削除
+            - var isDeletable = (nowCookie === post.trackingCookie)
+            if((post.char == 0) && (post.trackingCookie))
+              .image-area
+                img(src="/images/buta.png" style="margin-right:10px;")
+              .text-area
+                span 野生のブタさん＠#{post.trackingCookie}
+                span#sec 投稿:#{post.time}
+                p
+                  span #{post.content}だぶー。
+                p
+                  form(method="post" action="/posts?delete=2")
+                    input(type="hidden" name="id" value=post.id)
+                    button.Delete(type="submit") 削除
+            else if(post.char == 1)
+              .image-area
+                img(src="/images/azarasi.png" style="margin-right:10px;")
+              .text-area
+                span 野生のあざらしさん＠#{post.trackingCookie}
+                span#sec 投稿:#{post.time}
+                p
+                  span #{post.content}だもきゅ。
+                p
+                  form(method="post" action="/posts?delete=2")
+                    input(type="hidden" name="id" value=post.id)
+                    button.Delete(type="submit") 削除
+            else if(post.char == 2)
+              .image-area
+                img(src="/images/hituji.png" style="margin-right:10px;")
+              .text-area
+                span 野生のひつじさん＠#{post.trackingCookie}
+                span#sec 投稿:#{post.time}
+                p
+                  span #{post.content}だメ～。
+                p
+                  form(method="post" action="/posts?delete=2")
+                    input(type="hidden" name="id" value=post.id)
+                    button.Delete(type="submit") 削除
+            else if(post.char == 3)
+              .image-area
+                img(src="/images/inu.png" style="margin-right:10px;")
+              .text-area
+                span 野生のいぬさん＠#{post.trackingCookie}
+                span#sec 投稿:#{post.time}
+                p
+                  span #{post.content}だわん。
+                p
+                  form(method="post" action="/posts?delete=2")
+                    input(type="hidden" name="id" value=post.id)
+                    button.Delete(type="submit") 削除
+            else if(post.char == 4)
+              .image-area
+                img(src="/images/kuma.png" style="margin-right:10px;")
+              .text-area
+                span 野生のくまさん＠#{post.trackingCookie}
+                span#sec 投稿:#{post.time}
+                p
+                  span #{post.content}だくまー。
+                p
+                  form(method="post" action="/posts?delete=2")
+                    input(type="hidden" name="id" value=post.id)
+                    button.Delete(type="submit") 削除
+            else if(post.char == 5)
+              .image-area
+                img(src="/images/okami.png" style="margin-right:10px;")
+              .text-area
+                span 野生のおおかみさん＠#{post.trackingCookie}
+                span#sec 投稿:#{post.time}
+                p
+                  span #{post.content}だうぉーん。
+                p
+                  form(method="post" action="/posts?delete=2")
+                    input(type="hidden" name="id" value=post.id)
+                    button.Delete(type="submit") 削除
+            else if(post.trackingCookie)
+              .image-area
+                img(src="/images/tanuki.png" style="margin-right:10px;")
+              .text-area
+                span 野生のたぬきさん＠#{post.trackingCookie}
+                span#sec 投稿:#{post.time}
+                p
+                  span #{post.content}だぽん。
+                p
+                  form(method="post" action="/posts?delete=2")
+                    input(type="hidden" name="id" value=post.id)
+                    button.Delete(type="submit") 削除

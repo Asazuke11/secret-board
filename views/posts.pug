@@ -89,30 +89,25 @@ html(lang="ja")
         float:right;
         font-size: 10px;
       }
-      .ww1{
-        position:fixed;
-        bottom:450px;
-        left:-100px;
+      #login{
+        color:white;
+        padding:2px;
+        font-size: 10px;
+        border:solid 1px;
+        text-decoration: none;
+        border-radius: 5px;
       }
-      #ww1{
-        width:500px;
-        height:500px;
-        filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.9));
-      }
-      .ww2{
-        position:fixed;
-        bottom:350px;
-        right:380px;
-      }
-      #ww2{
-        width:450px;
-        height:450px;
-        filter: drop-shadow(-5px 5px 5px rgba(0,0,0,0.9));
+      #admin{
+        background: rgb(187,172,90);
+        background: linear-gradient(49deg, rgba(187,172,90,1) 0%, rgba(218,104,49,1) 66%, rgba(255,0,0,1) 100%);
+        border-radius: 10px;
+        color:white;
+        text-shadow:0px 0px 5px #ffffff;
       }
     title 秘密の匿名掲示板
   body
     header
-      a(href="/admin") ログイン
+      a#login(href="/admin") ログイン
       form(action="/posts" method="post")
         textarea(name="content" placeholder="つぶやき")
         p
@@ -122,8 +117,17 @@ html(lang="ja")
       if(posts)
         each post in posts
           .box
+            if(post.postedBy === "admin")
+              #admin
+                .image-area
+                  img(src="/images/raion.png" style="margin-right:10px;")
+                .text-area
+                  span ★野生の管理人★
+                  span#sec 投稿:#{post.time}
+                  p
+                    marquee(width="400") #{post.content}だがおー。
             - var isDeletable = (nowCookie === post.trackingCookie)
-            if(post.char == 0)
+            if((post.char == 0) && (post.trackingCookie))
               .image-area
                 img(src="/images/buta.png" style="margin-right:10px;")
               .text-area
@@ -201,7 +205,7 @@ html(lang="ja")
                     form(method="post" action="/posts?delete=1")
                       input(type="hidden" name="id" value=post.id)
                       button.Delete(type="submit") 削除
-            else
+            else if(post.trackingCookie)
               .image-area
                 img(src="/images/tanuki.png" style="margin-right:10px;")
               .text-area
