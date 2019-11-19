@@ -67,6 +67,7 @@ html(lang="ja")
         padding:10px;
         border-bottom:solid 1px pink;
         border-radius: 15px;
+        box-shadow: 2px 2px 4px -1px gray inset;
       }
       img{
         position:absolute;
@@ -104,7 +105,14 @@ html(lang="ja")
         color:white;
         text-shadow:0px 0px 5px #ffffff;
       }
-    title 秘密の匿名掲示板
+      footer{
+        width: 100%;
+        height:50px;
+        background-image: url("/images/kusa.png");
+        position: fixed;
+        bottom: 0px;
+      }
+    title 野生の匿名掲示板
   body
     header
       a#logout(href="/posts") ログアウト
@@ -215,3 +223,6 @@ html(lang="ja")
                   form(method="post" action="/posts?delete=2")
                     input(type="hidden" name="id" value=post.id)
                     button.Delete(type="submit") 削除
+      p 　
+      p 　
+    footer
